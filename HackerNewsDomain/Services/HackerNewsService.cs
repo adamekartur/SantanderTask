@@ -33,7 +33,7 @@ namespace HackerNewsDomain.Services
                     Title = details.Title,
                     Score = details.Score,
                     PostedBy = details.By,
-                    Time = new DateTime(details.Time),
+                    Time = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc).AddSeconds(details.Time).ToLocalTime(),
                     Uri = details.Url,
                 });
             }
