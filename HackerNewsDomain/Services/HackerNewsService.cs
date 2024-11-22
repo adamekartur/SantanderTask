@@ -1,14 +1,15 @@
 ﻿using HackerNewsDomain.Domain;
+using HackerNewsDomain.Repository;
 using Microsoft.Extensions.Logging;
 
 namespace HackerNewsDomain.Services
 {
     public sealed class HackerNewsService : INewsService
     {
-        private readonly INewsProvider newsProvider;
+        private readonly INewsRepository newsProvider;
         private readonly ILogger<HackerNewsService> logger;
 
-        public HackerNewsService(INewsProvider newsProvider, ILogger<HackerNewsService> logger)
+        public HackerNewsService(INewsRepository newsProvider, ILogger<HackerNewsService> logger)
         {
             this.newsProvider = newsProvider;
             this.logger = logger;

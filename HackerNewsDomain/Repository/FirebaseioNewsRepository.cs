@@ -1,15 +1,15 @@
 ﻿using HackerNewsDomain.Domain;
 using Newtonsoft.Json;
 
-namespace HackerNewsDomain.Services
+namespace HackerNewsDomain.Repository
 {
-    public sealed class FirebaseioNewsProvider : INewsProvider
+    public sealed class FirebaseioNewsRepository : INewsRepository
     {
         private readonly HttpClient httpClient;
         private readonly string beststoriesUrl = "https://hacker-news.firebaseio.com/v0/beststories.json";
         private readonly string storyDetailsUrl = "https://hacker-news.firebaseio.com/v0/item/{0}.json";
 
-        public FirebaseioNewsProvider(HttpClient httpClient)
+        public FirebaseioNewsRepository(HttpClient httpClient)
         {
             this.httpClient = httpClient;
         }

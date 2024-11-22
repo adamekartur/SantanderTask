@@ -1,4 +1,6 @@
+using HackerNewsDomain.Repository;
 using HackerNewsDomain.Services;
+using StackExchange.Redis;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,8 +11,15 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddScoped<FirebaseioNewsRepository>();
 builder.Services.AddScoped<INewsService, HackerNewsService>();
-builder.Services.AddScoped<INewsProvider, FirebaseioNewsProvider>();
+builder.Services.AddScoped<INewsRepository, RedisDecoratorRepository>(cnf => 
+{
+    var redisConStr = builder.Configuration.GetConnectionString("Redis") ?? throw new ArgumentException("No connection string set.");
+    IConnectionMultiplexer multiplexer = ConnectionMultiplexer.Connect(redisConStr);
+    return new RedisDecoratorRepository(cnf.GetRequiredService<FirebaseioNewsRepository>(), multiplexer.GetDatabase()); 
+});
+
 builder.Services.AddSingleton<HttpClient>();
 
 

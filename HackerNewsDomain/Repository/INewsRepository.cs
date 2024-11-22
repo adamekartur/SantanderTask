@@ -1,8 +1,8 @@
 ﻿using HackerNewsDomain.Domain;
 
-namespace HackerNewsDomain.Services
+namespace HackerNewsDomain.Repository
 {
-    public interface INewsProvider
+    public interface INewsRepository
     {
         Task<List<int>> GetBestNewsAsync();
 
