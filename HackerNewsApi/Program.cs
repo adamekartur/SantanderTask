@@ -9,7 +9,10 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddScoped<INewsService, MockNewsService>();
+builder.Services.AddScoped<INewsService, HackerNewsService>();
+builder.Services.AddScoped<INewsProvider, FirebaseioNewsProvider>();
+builder.Services.AddSingleton<HttpClient>();
+
 
 var app = builder.Build();
 
