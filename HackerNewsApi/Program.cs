@@ -15,7 +15,7 @@ builder.Services.AddScoped<FirebaseioNewsRepository>();
 builder.Services.AddScoped<INewsService, HackerNewsService>();
 builder.Services.AddScoped<INewsRepository, RedisDecoratorRepository>(cnf => 
 {
-    var redisConStr = builder.Configuration.GetConnectionString("Redis") ?? throw new ArgumentException("No connection string set.");
+    var redisConStr = builder.Configuration["REDISCACHECONNSTR_Redis"] ?? throw new ArgumentException("No connection string set.");
     IConnectionMultiplexer multiplexer = ConnectionMultiplexer.Connect(redisConStr);
     return new RedisDecoratorRepository(cnf.GetRequiredService<FirebaseioNewsRepository>(), multiplexer.GetDatabase()); 
 });
